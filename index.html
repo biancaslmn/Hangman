@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hangman</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+ 
+
+    <script src="main.js"></script>
+</head>
+
+<body>
+     <div id="main-container" class="container">
+            <section class="main-section">
+
+    <h1>HANGMAN</h1>
+
+    <h2>Flower Edition</h2>
+
+    <img src= "images/Peonies.png" class= "auth-image" alt = "titleimage" width="300px">
+
+    <p>Can you guess the name of the flower?</p>
+
+    <p> You will be given one hint and a flower image</p>
+
+    <div id="lifeCount">
+            <p> You have 5 chances</p>
+        </div>
+   
+        <div class= "btnsection">
+    <p> Press <button id="button" type="button" class="btn btn-outline-light">START</button>
+      to play the game!</p>
+    </div>
+    <section>
+			<div id="wins">Wins:</div>
+			<div id="wrongAnswers">Wrong Answers:</div>
+    </section>
+    
+    </div>
+
+<footer>
+        <div id="footercontainer">
+                <p>copyright 2018 Hangman Flower Edition</p>
+                </div>
+</footer>
+
+    <!--JavaScript section-->
+
+    <script>
+        var hints = [
+            // first hint Gardenia
+            {
+                hint : [' This flower belongs to the coffee plant family, ‘Rubiaceae’.'],
+                answer: "Gardenia"
+            } ,
+            // second hint Lily
+            {
+                hint : [' They’re highly toxic to our furry friends (cats).'],
+                answer: "Lily"
+            } ,
+            // third hint Magnolia
+            {
+                hint : [' They have been naturalized to almost all continents in the world because of their beauty.'],
+                answer: "Magnolia"
+            } ,
+            // fourth hint Orchid
+            {
+                hint : [' They have existed on the planet around 100 million years.'],
+                answer: "Orchid"
+            } ,
+            // fifth hint Hibiscus
+            {
+                hint : [' This flower is edible and has a tangy citrusy taste.'],
+                answer: "Hibiscus"
+            } 
+        ]
+    
+    </script>
+
+</body>
+</html>
