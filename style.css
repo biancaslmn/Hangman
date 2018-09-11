@@ -39,11 +39,83 @@
     padding: 30px 0;
  }
 
-  .container
+  #gameContainer
   {
     border-style: dotted;
     border-width:  10px 10px 10px 10px;
     border-color: lavender;
   }
+  .btnWrap{
+	position:relative;
+	margin:auto;
+	width:140px;
+}
+
+
+.btn:active{
+	top:3px;
+	border-bottom-width: 1px;
+}
+
+#startBtn{
+	background:#48ba22;
+	border-bottom:3px solid #008000;
+	-webkit-box-shadow: 0px 0px 7px #080d1c;
+	box-shadow: 0px 0px 7px #080d1c;
+}
+
+#startBtn:hover{
+	background: #44b020;
+}
+
+
+.wordWrap{
+	position:relative;
+	width:55%;
+	margin:auto;
+	height:47px;
+	text-align:center;
+	color: lavender;
+	font-weight:700;
+	line-height: 47px;
+}
+
+.mask{
+	border-bottom: 1px solid #ffffff;
+	padding:0 8px;
+	margin:0px 5px;
+}
+
+.unMask{
+	border-bottom: 1px solid #ffffff;
+	padding:0 3px;
+	margin:0 5px;
+}
+
+
+
+.hintWrap li{
+	list-style: none;
+}
+
+
+
+#wins{
+	width:50%;
+	float:left;
+}
+
+#wrongGuesses{
+	width:50%;
+	float:left;
+}
+
+footer{
+	
+	height:30px;
+	line-height: 30px;
+	font-weight:500;
+}
+
 
   
