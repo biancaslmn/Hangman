@@ -10,61 +10,69 @@
     <title>Hangman</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
- 
 
- 
+
+
 </head>
 
 <body>
-     <div id="main-container" id="gameContainer">
-            <div class="gameHeader">
+    <div id="gameContainer">
+        <div class="gameHeader">
 
-    <h1>HANGMAN</h1>
+            <h1>HANGMAN</h1>
 
-    <h2>Flower Edition</h2>
+            <h2>Flower Edition</h2>
 
-    <img src= "images/Peonies.png" class= "auth-image" alt = "titleimage" width="300px">
+            <img src="images/Peonies.png" class="auth-image" alt="titleimage" width="300px">
 
-    <div id="lifeCount">
-            <p> You have 5 chances</p>
+            <div id="lifeCount">
+                <p> You have 5 chances</p>
+            </div>
         </div>
-    </div>
 
-    <div id="messageField">
+        <div id="messageField">
 
-    <p>Can you guess the name of the flower?</p>
+            <p>Can you guess the name of the flower?</p>
 
-    <p> You will be given one hint and a flower image</p>
-      
-    </div>
-     
-       
-        <div class= "startBtn">
+
+
+        </div>
+
+
+        <div class="startBtn" id="initial">
             <div class="btnWrap">
-    <p> Press <button id="startButton" type="button" class="btn btn-outline-light">START</button>
-      to play the game!</p>
-      </div>
+                <p> You will be given one hint and a flower image</p>
+                <p> Press
+                    <button id="startButton" type="button" class="btn btn-outline-light">START</button>
+                    to play the game!</p>
 
-      <div class="row">
+            </div>
+
+            <div class="row">
 
 
-      </div>
+            </div>
+
+        </div>
+
+        <div class="wordWrap">
+
+        </div>
+        <section id="answerCount">
+            <div id="wins">Wins:</div>
+            <div id="wrongAnswers">Wrong Answers:</div>
+        </section>
 
     </div>
-    <section id="answerCount">
-			<div id="wins">Wins:</div>
-			<div id="wrongAnswers">Wrong Answers:</div>
-    </section>
-    
-    </div>
 
-<footer>
+    <footer>
         <div id="footercontainer">
-                <p>copyright 2018 Hangman Flower Edition</p>
-                </div>
-</footer>
+            <p>copyright 2018 Hangman Flower Edition</p>
+        </div>
+    </footer>
 
     <!--JavaScript section-->
 
@@ -119,6 +127,7 @@
 
         function gameStart(){
             //list of score value 
+            document.getElementById("initial").style.display = "none";
 
           var score = 0;
 	      var chances = 5;
@@ -126,7 +135,72 @@
 	      var wrongGuess = [];
 	      lifeCount.innerHTML = chances + " attempts left";
 	      winCount.innerHTML = "Wins: " + wins;
-	      wrongLetters.innerHTML = "Wrong Answers: " + wrongAnswers;
+          wrongLetters.innerHTML = "Wrong Answers: " + wrongGuess;
+          
+          document.onkeyup = function(event){
+
+var keyInput = event.key.toUpperCase();
+var letterIndex = letterArr.indexOf(keyInput);
+var keyInputCode = keyInput.charCodeAt(0);
+
+
+// Capital letter check
+if(keyInput.length == 1 && (keyInputCode >= 65 && keyInputCode <= 99)) {
+}
+if (letterIndex !== -1){
+
+}
+rightGuess.push(keyInput);
+
+     for (var i = 0; i < randAnswer.length; i++) {
+            if(keyInput === randAnswer.charAt(i)){
+                var unMask = document.getElementById("id"+i);
+                unMask.className = "unMask";
+                unMask.innerHTML = keyInput;
+                score++;
+            }
+            }
+
+
+// length
+
+   if (score === randAnswer.length){
+                wrongGuess.length = 0;
+                wrongLetters.innerHTML = "";
+                var newBtn = "<div class='btnWrap'><button id='playAgain' class='btn' autofocus>PLAY AGAIN</button></div>";
+                hintWrap.innerHTML = "<p>YOU WIN!</p></br>" + newBtn;
+                wrongLetters.innerHTML = "Wrong Guesses: ";
+                var playAgain = document.querySelector("#playAgain");
+                playAgain.onclick =  function(){
+                    wins++;
+                    gameStart();
+                };
+            }
+          else{
+              if(chances > 0 && wrongGuess.indexOf(keyInput) === -1){
+                wrongGuess.push(keyInput);
+
+                chances--;
+        lifeCount.innerHTML = chances + " attempts left";
+        wrongLetters.innerHTML = "Wrong Guesses: " + wrongGuess;
+              }
+            }
+
+            if(chances == 0){
+        var newBtn = "<button id='tryAgain' class='btn' autofocus>TRY AGAIN</button>";
+        hintWrap.innerHTML = "<p>YOU LOSE!</p></br>" + newBtn;
+        var tryAgain = document.querySelector("#tryAgain");
+        wrongGuess.length = 1;
+        wrongLetters.innerHTML = "Wrong Guesses: ";
+        document.onkeyup = function(event){
+            console.log("you lost");
+        };
+        tryAgain.onclick =  function(){
+            gameStart();
+        };
+    }
+}
+
          
         }
 
@@ -140,7 +214,7 @@
 
         //Get rid of start Button
 
-        startBtn.innerHTML = "<div class=\"wordWrap\"></div>";
+       
         var wordWrap = document.querySelector(".wordWrap");
 
         // Create blank underlined space
@@ -167,68 +241,7 @@
      
         // Events on Keyboard press
 
-        	document.onkeyup = function(event){
-
-            var keyInput = event.key.toUpperCase();
-            var letterIndex = letterArr.indexOf(keyInput);
-            var keyInputCode = keyInput.charCodeAt(0);
-
-            }
-        // Capital letter check
-        if(keyInput.length == 1 && (keyInputCode >= 65 && keyInputCode <= 99)) {
-         }
-         if (letterIndex !== -1){
-
-         }
-         rightGuess.push(keyInput);
-
-         		for (var i = 0; i < randAnswer.length; i++) {
-						if(keyInput === randAnswer.charAt(i))
-							var unMask = document.getElementById("id"+i);
-							unMask.className = "unMask";
-                            unMask.innerHTML = keyInput;
-                            score++;
-						}
-         
-
-           // length
-
-           	if (score === randAnswer.length){
-							wrongGuess.length = 0;
-							wrongLetters.innerHTML = "";
-							var newBtn = "<div class='btnWrap'><button id='playAgain' class='btn' autofocus>PLAY AGAIN</button></div>";
-							hintWrap.innerHTML = "<p>YOU WIN!</p></br>" + newBtn;
-							wrongLetters.innerHTML = "Wrong Guesses: ";
-							var playAgain = document.querySelector("#playAgain");
-							playAgain.onclick =  function(){
-								wins++;
-								gameStart();
-							};
-						}
-                      else{
-                          if(chances > 0 && wrongGuess.indexOf(keyInput) === -1){
-                            wrongGuess.push(keyInput);
-
-                            chances--;
-					lifeCount.innerHTML = chances + " attempts left";
-					wrongLetters.innerHTML = "Wrong Guesses: " + wrongGuess;
-                          }
-                        }
-
-                        if(chances == 0){
-					var newBtn = "<div class='btnWrap'><button id='tryAgain' class='btn' autofocus>TRY AGAIN</button></div>";
-					riddleWrap.innerHTML = "<p>YOU LOSE!</p></br>" + newBtn;
-					var tryAgain = document.querySelector("#tryAgain");
-					wrongGuess.length = 0;
-					wrongLetters.innerHTML = "Wrong Guesses: ";
-					document.onkeyup = function(event){
-						console.log("you lost");
-					};
-					tryAgain.onclick =  function(){
-						gameStart();
-					};
-				}
-			
+        	
 
     </script>
 
