@@ -19,231 +19,42 @@
 </head>
 
 <body>
-    <div id="gameContainer">
-        <div class="gameHeader">
 
-            <h1>HANGMAN</h1>
+        <div class="jumbotron">
+                <h1>HANGMAN</h1>
 
-            <h2>Flower Edition</h2>
-
-            <img src="images/Peonies.png" class="auth-image" alt="titleimage" width="300px">
-
-            <div id="lifeCount">
-                <p> You have 5 chances</p>
-            </div>
-        </div>
-
-        <div id="messageField">
-
-            <p>Can you guess the name of the flower?</p>
-
-
-
-        </div>
-
-
-        <div class="startBtn" id="initial">
-            <div class="btnWrap">
-                <p> You will be given one hint and a flower image</p>
-                <p> Press
-                    <button id="startButton" type="button" class="btn btn-outline-light">START</button>
-                    to play the game!</p>
-
-            </div>
-
-            <div class="row">
-
-
-            </div>
-
-        </div>
-
-        <div class="wordWrap">
-
-        </div>
-        <section id="answerCount">
-            <div id="wins">Wins:</div>
-            <div id="wrongAnswers">Wrong Answers:</div>
-        </section>
-
-    </div>
-
-    <footer>
-        <div id="footercontainer">
-            <p>copyright 2018 Hangman Flower Edition</p>
-        </div>
-    </footer>
-
-    <!--JavaScript section-->
-
-    <script ="text/javascript">
-        var hints = [
-            // first hint Gardenia
-            {
-                hint : [' This flower belongs to the coffee plant family, ‘Rubiaceae’.',{image: "Gardenia.png"}],
-                answer: "Gardenia"
-            } ,
-            // second hint Lily
-            {
-                hint : [' They’re highly toxic to our furry friends (cats).'],
-                answer: "Lily"
-            } ,
-            // third hint Magnolia
-            {
-                hint : [' They have been naturalized to almost all continents in the world because of their beauty.'],
-                answer: "Magnolia"
-            } ,
-            // fourth hint Orchid
-            {
-                hint : [' They have existed on the planet around 100 million years.'],
-                answer: "Orchid"
-            } ,
-            // fifth hint Hibiscus
-            {
-                hint : [' This flower is edible and has a tangy citrusy taste.'],
-                answer: "Hibiscus"
-            } 
-        ]
+                <h2>Flower Edition</h2>
+                <img class="display-4" src="images/Peonies.png" alt="Peonies">
     
-    // geting elements from HTML section
+                <p id="chancesLeft" class="lead">You have 5 chances</p>
+                
+                <div id="quiz-area" class="my-4">
+                <p>Can you guess the name of the flower?</p>
 
-          var startBtn = document.getElementById("startButton");
-          var msgField = document.getElementById("messageField");
-          var answerCount = document.getElementById("answerCount");
-          var lifeCount = document.getElementById ("lifeCount");
-          var wrongLetters = document.getElementById("wrongAnswers");
+                <a class="btn btn-success btn-lg" id="start-button" href="#" role="button">Start</a>
+
+            </div>
+            <section id="answerCount">
+                <div id="wins">Wins:</div>
+                <div id="wrongAnswers">Wrong Answers:</div>
+            </section>
+    
+            <footer>
+                    <div id="footercontainer">
+                        <p>copyright 2018 Hangman Flower Edition</p>
+                    </div>
+                </footer>
+            
+        </div>
+                </div>
+
           
-          
-          var winCount = document.getElementById("wins");
-          var wins = 0;
+              </div>
 
-
-         //Start the game
-
-         startBtn.onclick =  function(){
-	     gameStart();
-        };
-
-
-        function gameStart(){
-            //list of score value 
-            document.getElementById("initial").style.display = "none";
-
-          var score = 0;
-	      var chances = 5;
-	      var rightGuess = [];
-	      var wrongGuess = [];
-	      lifeCount.innerHTML = chances + " attempts left";
-	      winCount.innerHTML = "Wins: " + wins;
-          wrongLetters.innerHTML = "Wrong Answers: " + wrongGuess;
-          
-          document.onkeyup = function(event){
-
-var keyInput = event.key.toUpperCase();
-var letterIndex = letterArr.indexOf(keyInput);
-var keyInputCode = keyInput.charCodeAt(0);
-
-
-// Capital letter check
-if(keyInput.length == 1 && (keyInputCode >= 65 && keyInputCode <= 99)) {
-}
-if (letterIndex !== -1){
-
-}
-rightGuess.push(keyInput);
-
-     for (var i = 0; i < randAnswer.length; i++) {
-            if(keyInput === randAnswer.charAt(i)){
-                var unMask = document.getElementById("id"+i);
-                unMask.className = "unMask";
-                unMask.innerHTML = keyInput;
-                score++;
-            }
-            }
-
-
-// length
-
-   if (score === randAnswer.length){
-                wrongGuess.length = 0;
-                wrongLetters.innerHTML = "";
-                var newBtn = "<div class='btnWrap'><button id='playAgain' class='btn' autofocus>PLAY AGAIN</button></div>";
-                hintWrap.innerHTML = "<p>YOU WIN!</p></br>" + newBtn;
-                wrongLetters.innerHTML = "Wrong Guesses: ";
-                var playAgain = document.querySelector("#playAgain");
-                playAgain.onclick =  function(){
-                    wins++;
-                    gameStart();
-                };
-            }
-          else{
-              if(chances > 0 && wrongGuess.indexOf(keyInput) === -1){
-                wrongGuess.push(keyInput);
-
-                chances--;
-        lifeCount.innerHTML = chances + " attempts left";
-        wrongLetters.innerHTML = "Wrong Guesses: " + wrongGuess;
-              }
-            }
-
-            if(chances == 0){
-        var newBtn = "<button id='tryAgain' class='btn' autofocus>TRY AGAIN</button>";
-        hintWrap.innerHTML = "<p>YOU LOSE!</p></br>" + newBtn;
-        var tryAgain = document.querySelector("#tryAgain");
-        wrongGuess.length = 1;
-        wrongLetters.innerHTML = "Wrong Guesses: ";
-        document.onkeyup = function(event){
-            console.log("you lost");
-        };
-        tryAgain.onclick =  function(){
-            gameStart();
-        };
-    }
-}
-
-         
-        }
-
-        // Picking hints a random
-
-        var randHint = hints[Math.floor(Math.random() * hints.length)];
-
-        var randAnswer = randHint.answer;
-
-        var letterArr = randHint.answer.split('');
-
-        //Get rid of start Button
-
-       
-        var wordWrap = document.querySelector(".wordWrap");
-
-        // Create blank underlined space
-
-        	for(var i = 0; i < letterArr.length; i++){
-		var mask = document.createElement("span");
-		mask.className = "mask";
-		mask.id = "id" + i;
-        wordWrap.appendChild(mask);
-        }
-
-        // Display rhints
-
-        msgField.innerHTML = "<div class=\"hintWrap\"></div>";
-        var hintWrap = document.querySelector(".hintWrap");
-        
-        // Create original line for each hint
-
-        for (var i = 0; i < randHint.hint.length; i++) {
-		var line = document.createElement("li");
-		hintWrap.appendChild(line);
-		line.innerHTML = randHint.hint[i] + "</br>";
-	}
-     
-        // Events on Keyboard press
-
-        	
-
-    </script>
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="Hangmangame.js"></script>
+   
 
 </body>
 </html>

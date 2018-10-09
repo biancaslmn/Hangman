@@ -1,85 +1,74 @@
+$(document).ready(function(){
+
+var panel = $('#quiz-area');
 var hints = [
     // first hint Gardenia
     {
         hint : [' This flower belongs to the coffee plant family, ‘Rubiaceae’.'],
-        answer: "Gardenia"
+        answer: "Gardenia",
+        images:"images/Gardenia.png",
     } ,
     // second hint Lily
     {
         hint : [' They’re highly toxic to our furry friends (cats).'],
-        answer: "Lily"
+        answer: "Lily",
+        images:"images/Lily.png",
     } ,
     // third hint Magnolia
     {
         hint : [' They have been naturalized to almost all continents in the world because of their beauty.'],
-        answer: "Magnolia"
+        answer: "Magnolia",
+        images:"images/Magnolia.png",
     } ,
     // fourth hint Orchid
     {
         hint : [' They have existed on the planet around 100 million years.'],
-        answer: "Orchid"
+        answer: "Orchid",
+        images:"images/Orchid.png",
     } ,
     // fifth hint Hibiscus
     {
         hint : [' This flower is edible and has a tangy citrusy taste.'],
-        answer: "Hibiscus"
+        answer: "Hibiscus",
+        images:"images/Hibiscus.png",
     } 
 ]
 
+
+//Click-event
+
+$(document).on('click', '#start-over', function(e) {
+    game.reset();
+  });
+  
+  $(document).on('click', '.answer-button', function(e) {
+    game.clicked(e);
+  });
+  
+  $(document).on('click', '#start-button', function(e) {
+    $('#chancesLeft').replaceWith('<h2>chances Remaining: <span id="counter-number">5</span> Chances</h2>');
+    game.loadHint();
+  });
+
+
+//Declaring Variables
 var answers = [ "Gardenia","Lily","Magnolia","Orchid","Hibiscus"]
 
-var wrongGuesses;
-var word;
-var Guesses;
-var startGame = function () {
-    word = getRandomWord ();
-    blankWordWithGuesses = BlankForWrongLetters ();
-};
+var game = {
+    hints:hints,
+    currentHint:0,
+    wins:0,
+    losses:0,
 
-var getRandomWord = function (){
-    return words[Math.floor(Math.random)* words.lenght]
-};
+    //Function Loading Hints
+    loadHint: function(){
+        panel.html('<h2>' + hints[this.currentHint].hint + '</h2>' );
+        for (var i = 0; i<hints[this.currentHint].answers.length; i++){
+          panel.append('<button class="answer-button" id="button"' + 'data-name="' + hints[this.currentHint].answers[i] + '">' + hints[this.currentHint].answers[i]+ '</button>');
+        }
+      },
 
-var listenForKeyPress = function (){
-    document.onKkypress = handleKeyPress;
-};
-
-var checkGuess = function (letter, word){
-
-};
-
-var blankForWrongLetters= function ( word){
-
-};
-
-var guessedLetters = function (){
-
-};
-
-var handeKeyPress = function (event){
-
-};
-
-var handleCorrectGuess = function (){
-
-};
-
-var handleIncorrectGuess = function (){
-
-};
-
-var cupdateCorrectGuesses = function (){
-
-};
-var updateIncorrectGuesses = function (string){
-    document.getElementById()
-
-};
-
-var handleWin = function (){
-
-};
-
-var handleLoss = function (){
-
-};
+     
+ 
+}
+});
